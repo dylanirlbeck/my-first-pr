@@ -54,8 +54,10 @@ module State = {
       };
     <span
       className={Cn.make([
-        "inline-block rounded-full px-3 py-1 text-lg
-      text-white mr-2",
+        [%tw
+          "inline-block rounded-full px-3 py-1 text-lg
+      text-white mr-2 font-bold"
+        ],
         background,
       ])}>
       name->React.string
