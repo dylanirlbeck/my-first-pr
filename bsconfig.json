@@ -9,7 +9,8 @@
   },
   "bsc-flags": ["-bs-super-errors", "-bs-no-version-header"],
   "ppx-flags": [
-    ["@dylanirlbeck/tailwind-ppx/tailwind-ppx", "-path src/tailwind.css"]
+    ["@dylanirlbeck/tailwind-ppx/tailwind-ppx", "-path src/tailwind.css"],
+    ["decco/ppx"]
   ],
   "package-specs": [
     {
@@ -18,7 +19,13 @@
     }
   ],
   "suffix": ".bs.js",
-  "bs-dependencies": ["reason-react", "bs-fetch", "re-classnames"],
+  "bs-dependencies": [
+    "reason-react",
+    "bs-fetch",
+    "re-classnames",
+    "decco",
+    "bs-webapi"
+  ],
   "refmt": 3,
   "warnings": {
     "error": "+8"

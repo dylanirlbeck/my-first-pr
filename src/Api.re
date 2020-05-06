@@ -5,11 +5,16 @@ let makeQuery = username => {j|
         nodes {
           author {
             login
+            avatarUrl
           }
           repository {
             name
           }
           body
+          title
+          url
+          state
+          createdAt
         }
       }
     }
@@ -48,7 +53,11 @@ let sendQuery = (~query) =>
            |> Js.Promise.then_(data =>
                 switch (Js.Json.decodeObject(data)) {
                 | Some(obj) =>
-                  Js.Dict.unsafeGet(obj, "data") |> Js.Promise.resolve
+                  let data = Js.Dict.unsafeGet(obj, "data");
+                  let errors = Js.Dict.get(obj, "errors");
+                  errors != None
+                    ? Js.Promise.reject(Graphql_error("Errors found"))
+                    : Js.Promise.resolve(data);
                 | None =>
                   Js.Promise.reject(
                     Graphql_error("Response is not an object"),
@@ -63,10 +72,4 @@ let sendQuery = (~query) =>
        )
   );
 
-type pullRequest = {
-  repoName: string,
-  body: string,
-  date: Js.Date.t,
-  merged: bool,
-  url: string,
-};
+let decode = Decoder.decode;

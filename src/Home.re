@@ -1,20 +1,18 @@
-[@react.component]
-let make = () => {
-  let (username, setUsername) = Hooks.useInput("");
-  let (actualUsername, setActualUsername) = React.useState(_ => None);
-
-  <div
-    className=[%tw
-      "w-full h-full bg-white flex flex-col justify-start items-center"
-    ]>
-    <div>
+module Header = {
+  [@react.component]
+  let make = () => {
+    <div className="flex flex-col items-center">
       <h1 className=[%tw "text-6xl"]> "My First PR"->React.string </h1>
-    </div>
-    <div>
-      <span>
-        "View the details of your first pull request on GitHub"->React.string
-      </span>
-    </div>
+      <span> "View your very first GitHub pull request!"->React.string </span>
+    </div>;
+  };
+};
+
+module Input = {
+  [@react.component]
+  let make = (~setActualUsername) => {
+    let (username, setUsername) = Hooks.useInput("");
+
     <div className=[%tw "flex flex-col items-center"]>
       <span className=[%tw "font-bold mb-2"]>
         "Enter in your GitHub username:"->React.string
@@ -44,7 +42,38 @@ let make = () => {
           "Submit"->React.string
         </button>
       </div>
-    </div>
+    </div>;
+  };
+};
+
+module Footer = {
+  [@react.component]
+  let make = () => {
+    let heartEmoji: string = [%raw "'\u200D\u2764\uFE0F'"];
+    <footer className=[%tw "flex sticky bottom-0"]>
+      <span className="text-lg font-bold">
+        {j|Made with $heartEmoji by |j}->React.string
+        <a
+          className="text-lg font-bold underline"
+          href="https://github.com/dylanirlbeck"
+          target="_blank"
+          rel="noopener
+ noreferrer">
+          "dylanirlbeck"->React.string
+        </a>
+      </span>
+    </footer>;
+  };
+};
+
+[@react.component]
+let make = () => {
+  let (actualUsername, setActualUsername) = React.useState(_ => None);
+  <div className=[%tw "flex flex-col h-full justify-start items-center p-2"]>
+    <Header />
     <Card username=actualUsername />
+    <Input setActualUsername />
+    <Spacer bottom=48 />
+    <Footer />
   </div>;
 };

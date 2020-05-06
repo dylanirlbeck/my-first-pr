@@ -3,13 +3,15 @@
   "version": "0.1.0",
   "license": "MIT",
   "devDependencies": {
-    "@dylanirlbeck/tailwind-ppx": "0.6.4",
+    "@dylanirlbeck/tailwind-ppx": "0.7.0",
     "bs-platform": "7.0.1",
     "parcel-bundler": "^1.12.4",
     "tailwindcss": "^1.1.4"
   },
   "dependencies": {
     "bs-fetch": "^0.5.2",
+    "bs-webapi": "^0.15.9",
+    "decco": "^1.2.1",
     "re-classnames": "^4.1.0",
     "reason-react": ">=0.7.0"
   },
