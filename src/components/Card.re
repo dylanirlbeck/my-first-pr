@@ -121,7 +121,6 @@ let make = (~username) => {
   React.useEffect1(
     () => {
       if (Belt.Option.getWithDefault(username, "") != "") {
-        Js.log(username);
         setData(_ => Loading);
         Api.sendQuery(~query=Api.makeQuery(username))
         |> then_(res => {
