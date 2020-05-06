@@ -1,9 +1,23 @@
+let githubIcon: string = [%raw "require('/assets/github.png')"];
+
 module Header = {
   [@react.component]
   let make = () => {
-    <div className="flex flex-col items-center">
-      <h3 className=[%tw "text-6xl"]> "My First PR"->React.string </h3>
-      <span> "See your very first GitHub pull request!"->React.string </span>
+    <div
+      className=[%tw
+        "flex flex-row items-center w-full bg-gray-300 justify-center py-4"
+      ]>
+      <img className=[%tw "flex"] src=githubIcon />
+      <Spacer left=8 />
+      <div className=[%tw "flex flex-col items-center"]>
+        <h3 className=[%tw "flex text-6xl font-semibold"]>
+          "My First PR"->React.string
+        </h3>
+        <Spacer left=4 />
+        <span className=[%tw "flex"]>
+          "See your very first GitHub pull request!"->React.string
+        </span>
+      </div>
     </div>;
   };
 };
@@ -14,7 +28,7 @@ module Input = {
     let (username, setUsername) = Hooks.useInput("");
 
     <div className=[%tw "flex flex-col items-center"]>
-      <span className=[%tw "font-bold mb-2"]>
+      <span className=[%tw "font-bold text-xl mb-2"]>
         "Enter in your GitHub username:"->React.string
       </span>
       <div className=[%tw "flex"]>
@@ -26,20 +40,21 @@ module Input = {
           "@"->React.string
         </span>
         <input
-          className=[%tw "border border-2 rounded-r w-full px-4 py-2"]
+          className=[%tw "border border-2 rounded-r w-full px-8 py-2"]
           type_="text"
           onChange=setUsername
           placeholder="dylanirlbeck"
         />
+        <Spacer left=2 />
         <button
           className=[%tw
             "flex-shrink-0 bg-green-500 hover:bg-green-700
- border-green-500 hover:border-green-700 text-sm border-4 text-white py-1 px-2
+ border-green-500 hover:border-green-700 text-base border-4 text-white py-1 px-4
  rounded"
           ]
           onClick={_ => {setActualUsername(_ => Some(username))}}
           type_="button">
-          "Submit"->React.string
+          "View"->React.string
         </button>
       </div>
     </div>;
@@ -69,14 +84,15 @@ module Footer = {
 [@react.component]
 let make = () => {
   let (actualUsername, setActualUsername) = React.useState(_ => None);
-  <div className=[%tw "flex flex-col h-full justify-start items-center p-2"]>
+  <div className=[%tw "flex flex-col h-full justify-start items-center"]>
     <Header />
     <div className="flex flex-col justify-center flex-grow">
-      <Card username=actualUsername />
-      <Spacer bottom=8 />
       <Input setActualUsername />
+      <Spacer bottom=12 />
+      <Card username=actualUsername />
     </div>
     <Spacer bottom=48 />
     <Footer />
+    <Spacer bottom=6 />
   </div>;
 };

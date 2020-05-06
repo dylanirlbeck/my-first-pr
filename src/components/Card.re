@@ -21,7 +21,7 @@ exception PrStateException(string);
 module Title = {
   [@react.component]
   let make = (~text) => {
-    <span className=[%tw "text-sm italic text-gray-600 flex items-center"]>
+    <span className=[%tw "text-base italic text-gray-600 flex items-center"]>
       text->React.string
     </span>;
   };
@@ -32,10 +32,10 @@ module Body = {
   let make = (~prTitle, ~prDescription) => {
     <div className=[%tw "rounded-b-md"]>
       <span
-        className=[%tw "block text-lg text-gray-800 font-bold tracking-wide"]>
+        className=[%tw "block text-xl text-gray-800 font-bold tracking-wide"]>
         {prTitle |> React.string}
       </span>
-      <p className=[%tw "block text-gray-600 text-sm"]>
+      <p className=[%tw "block text-gray-600 text-base"]>
         {prDescription |> React.string}
       </p>
     </div>;
@@ -54,7 +54,7 @@ module State = {
       };
     <span
       className={Cn.make([
-        "inline-block rounded-full px-3 py-1 text-lg font-semibold
+        "inline-block rounded-full px-3 py-1 text-lg
       text-white mr-2",
         background,
       ])}>
