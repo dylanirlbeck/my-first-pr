@@ -1,10 +1,14 @@
 {
-  "name": "tailwind-starter",
+  "name": "my-first-pr",
   "version": "0.1.0",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dylanirlbeck/my-first-pr"
+  },
   "devDependencies": {
     "@dylanirlbeck/tailwind-ppx": "0.7.0",
-    "bs-platform": "7.0.1",
+    "bs-platform": "7.1.1",
     "parcel-bundler": "^1.12.4",
     "tailwindcss": "^1.1.4"
   },
@@ -13,6 +17,8 @@
     "bs-webapi": "^0.15.9",
     "decco": "^1.2.1",
     "re-classnames": "^4.1.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
     "reason-react": ">=0.7.0"
   },
   "scripts": {

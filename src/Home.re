@@ -15,7 +15,7 @@ module Header = {
         </h3>
         <Spacer left=4 />
         <span className=[%tw "flex"]>
-          "See your very first GitHub pull request!"->React.string
+          "Revisit your very first GitHub pull request!"->React.string
         </span>
       </div>
     </div>;
