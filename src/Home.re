@@ -2,8 +2,8 @@ module Header = {
   [@react.component]
   let make = () => {
     <div className="flex flex-col items-center">
-      <h1 className=[%tw "text-6xl"]> "My First PR"->React.string </h1>
-      <span> "View your very first GitHub pull request!"->React.string </span>
+      <h3 className=[%tw "text-6xl"]> "My First PR"->React.string </h3>
+      <span> "See your very first GitHub pull request!"->React.string </span>
     </div>;
   };
 };
@@ -71,8 +71,11 @@ let make = () => {
   let (actualUsername, setActualUsername) = React.useState(_ => None);
   <div className=[%tw "flex flex-col h-full justify-start items-center p-2"]>
     <Header />
-    <Card username=actualUsername />
-    <Input setActualUsername />
+    <div className="flex flex-col justify-center flex-grow">
+      <Card username=actualUsername />
+      <Spacer bottom=8 />
+      <Input setActualUsername />
+    </div>
     <Spacer bottom=48 />
     <Footer />
   </div>;

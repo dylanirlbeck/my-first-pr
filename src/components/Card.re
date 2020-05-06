@@ -1,5 +1,3 @@
-let str = React.string;
-let logo: string = [%raw "require('../assets/logo.png')"];
 let prImage: string = [%raw "require('../assets/pull_request.png')"];
 
 let fakeData: Decoder.pullRequest = {
@@ -23,24 +21,22 @@ exception PrStateException(string);
 module Title = {
   [@react.component]
   let make = (~text) => {
-    <div className=[%tw "px-4 py-8"]>
-      <span className=[%tw "text-2xl font-bold text-gray-800"]>
-        text->React.string
-      </span>
-    </div>;
+    <span className=[%tw "text-sm italic text-gray-600 flex items-center"]>
+      text->React.string
+    </span>;
   };
 };
 
 module Body = {
   [@react.component]
   let make = (~prTitle, ~prDescription) => {
-    <div className=[%tw "px-4 py-8 rounded-b-md"]>
+    <div className=[%tw "rounded-b-md"]>
       <span
         className=[%tw "block text-lg text-gray-800 font-bold tracking-wide"]>
-        {prTitle |> str}
+        {prTitle |> React.string}
       </span>
       <p className=[%tw "block text-gray-600 text-sm"]>
-        {prDescription |> str}
+        {prDescription |> React.string}
       </p>
     </div>;
   };
@@ -76,6 +72,46 @@ module Date = {
   };
 };
 
+module Container = {
+  [@react.component]
+  let make = (~children) => {
+    <div
+      className=[%tw
+        "max-w-md hover:bg-gray-100 rounded overflow-hidden shadow-lg
+               p-4 cursor-pointer h-64"
+      ]>
+      children
+    </div>;
+  };
+};
+
+module Card = {
+  [@react.component]
+  let make = (~pr: Decoder.pullRequest) => {
+    <Container>
+      <div
+        className=[%tw "flex flex-col justify-between h-full"]
+        onClick={_ => {
+          let window = Webapi.Dom.window;
+          window
+          ->(Webapi.Dom.Window.open_(~url=pr.url, ~name="repoWindow"))
+          ->ignore;
+        }}>
+        <div>
+          <Title text={pr.repoName} />
+          <Body prTitle={pr.title} prDescription={pr.body} />
+        </div>
+        <div className=[%tw "flex flex-row items-center justify-between"]>
+          <State state={pr.state} />
+          <Date
+            date={Js.Date.toLocaleDateString(Js.Date.fromString(pr.date))}
+          />
+        </div>
+      </div>
+    </Container>;
+  };
+};
+
 [@react.component]
 let make = (~username) => {
   open Js.Promise;
@@ -104,53 +140,10 @@ let make = (~username) => {
   );
 
   // TODO add a Loading spinner
-  <div className=[%tw "flex-grow flex flex-col justify-center"]>
-    {switch (data) {
-     | Empty =>
-       let pr = fakeData;
-       <div
-         className=[%tw
-           "max-w-sm hover:bg-gray-100 rounded overflow-hidden shadow-lg
-               p-4 cursor-pointer"
-         ]
-         onClick={_ => {
-           let window = Webapi.Dom.window;
-           window
-           ->(Webapi.Dom.Window.open_(~url=pr.url, ~name="repoWindow"))
-           ->ignore;
-         }}>
-         <Title text={pr.repoName} />
-         <Body prTitle={pr.title} prDescription={pr.body} />
-         <div className=[%tw "flex items-center justify-between"]>
-           <State state={pr.state} />
-           <Date date={Js.Date.toDateString(Js.Date.fromString(pr.date))} />
-         </div>
-       </div>;
-     | Error => <div> "Error..."->React.string </div>
-     | Loading => <div> "Loading..."->React.string </div>
-     | Data(d) =>
-       let pr = Api.decode(d);
-       Js.log(pr);
-       <div
-         className=[%tw
-           "max-w-sm hover:bg-gray-100 rounded overflow-hidden shadow-lg
-               p-4 cursor-pointer"
-         ]
-         onClick={_ => {
-           let window = Webapi.Dom.window;
-           window
-           ->(Webapi.Dom.Window.open_(~url=pr.url, ~name="repoWindow"))
-           ->ignore;
-         }}>
-         <Title text={pr.repoName} />
-         <Body prTitle={pr.title} prDescription={pr.body} />
-         <div className=[%tw "flex items-center justify-between"]>
-           <State state={pr.state} />
-           <Date
-             date={Js.Date.toLocaleDateString(Js.Date.fromString(pr.date))}
-           />
-         </div>
-       </div>;
-     }}
-  </div>;
+  switch (data) {
+  | Empty => <Card pr=fakeData />
+  | Error => <Container> <div> "Error..."->React.string </div> </Container>
+  | Loading => <Container> <div> "Loading..."->React.string </div> </Container>
+  | Data(d) => <Card pr={Api.decode(d)} />
+  };
 };
