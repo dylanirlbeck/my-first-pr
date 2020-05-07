@@ -20,10 +20,10 @@ The entire list of tools used in this project:
 - [`tailwind-ppx`](https://github.com/dylanirlbeck/tailwind-ppx)
 - [Create ReasonReact Tailwind](https://github.com/bodhish/create-reason-react-tailwind)
 
-## Developing
+## Contributing
 
-PRs are very much welcome! To run the project, the following commands should be
-run in separate tabs:
+Pull requests and design suggestions are very much welcome! To run the project,
+the following commands should be run in separate tabs:
 
 - `yarn re:watch` - Compiles Reason files and watches for changes
 - `yarn dev` - Uses Parcel to run the project on `localhost:1234`
