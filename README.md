@@ -19,6 +19,7 @@ The entire list of tools used in this project:
 - [Tailwind CSS](https://tailwindcss.com)
 - [`tailwind-ppx`](https://github.com/dylanirlbeck/tailwind-ppx)
 - [Create ReasonReact Tailwind](https://github.com/bodhish/create-reason-react-tailwind)
+- [GitHub GraphQL API](https://developer.github.com/v4/)
 
 ## Contributing
 
