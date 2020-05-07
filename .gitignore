@@ -3,6 +3,7 @@
 /lib
 /node_modules
 .tailwind_ppx_cache
+.env
 
 # Ignore these associated with reason-react and bsb
 .merlin
