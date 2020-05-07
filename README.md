@@ -1,25 +1,29 @@
-# tailwind-ppx starter
+# my-first-pr
 
-A starter project to play around with `tailwind-ppx` in a ReasonReact project.
+Revisit your very first GitHub pull request:
+[`my-first-pr.netlify.app`](https://my-first-pr.netlify.app)! See your first
+PR's repository, title, opened date, and more, all by entering your username.
 
-## Run Project
+<img src="assets/my_first_pr.png" />
 
-Inside the project directory run the following:
+## Tools
 
-```sh
-yarn # Builds project dependencies
-yarn re:watch # Compiles Reason and watches for file changes
-```
+This project was mainly built as a proof-of-concept of
+[`tailwind-ppx`](https://github.com/dylanirlbeck/tailwind-ppx), a ReasonML/OCaml
+PPX I wrote to validate your Tailwind classes at compile-time. Turns out, the
+PPX worked pretty well (though I'm biased)!
 
-and then in a separate shell run
+The entire list of tools used in this project:
 
-```sh
-yarn build:styles # Generates Tailwind CSS
-yarn dev # Starts the server
-```
+- [ReasonReact](https://reasonml.github.io/reason-react/)
+- [Tailwind CSS](https://tailwindcss.com)
+- [`tailwind-ppx`](https://github.com/dylanirlbeck/tailwind-ppx)
+- [Create ReasonReact Tailwind](https://github.com/bodhish/create-reason-react-tailwind)
 
-> Note that `src/tailwind.css` is automatically generated from `src/index.css`.
-> If you modify `src/index.css` you need to run `yarn build:styles` to
-> re-generate your Tailwind CSS (and ensure `tailwind-ppx` is up-to-date).
+## Developing
 
-<img src="./LandingPage.png" height="500" width="500">
+PRs are very much welcome! To run the project, the following commands should be
+run in separate tabs:
+
+- `yarn re:watch` - Compiles Reason files and watches for changes
+- `yarn dev` - Uses Parcel to run the project on `localhost:1234`
