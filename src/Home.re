@@ -40,7 +40,7 @@ module Input = {
           "@"->React.string
         </span>
         <input
-          className=[%tw "border border-2 rounded-r w-full px-8 py-2"]
+          className=[%tw "border border-2 rounded-r w-full px-4 py-2"]
           type_="text"
           onChange=setUsername
           placeholder="dylanirlbeck"
