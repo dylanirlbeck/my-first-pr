@@ -68,7 +68,7 @@ module State = {
 module Date = {
   [@react.component]
   let make = (~date) => {
-    <span className="text-lg font-light text-gray-600">
+    <span className=[%tw "text-lg font-light text-gray-600"]>
       date->React.string
     </span>;
   };

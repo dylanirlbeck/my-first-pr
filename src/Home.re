@@ -66,10 +66,10 @@ module Footer = {
   let make = () => {
     let heartEmoji: string = [%raw "'\u200D\u2764\uFE0F'"];
     <footer className=[%tw "flex sticky bottom-0"]>
-      <span className="text-lg font-bold">
+      <span className=[%tw "text-lg font-bold"]>
         {j|Made with $heartEmoji by |j}->React.string
         <a
-          className="text-lg font-bold underline"
+          className=[%tw "text-lg font-bold underline"]
           href="https://github.com/dylanirlbeck"
           target="_blank"
           rel="noopener
@@ -86,7 +86,7 @@ let make = () => {
   let (actualUsername, setActualUsername) = React.useState(_ => None);
   <div className=[%tw "flex flex-col h-full justify-start items-center"]>
     <Header />
-    <div className="flex flex-col justify-center flex-grow">
+    <div className=[%tw "flex flex-col justify-center flex-grow"]>
       <Input setActualUsername />
       <Spacer bottom=12 />
       <Card username=actualUsername />
