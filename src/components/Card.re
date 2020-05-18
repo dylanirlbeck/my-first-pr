@@ -1,5 +1,3 @@
-let prImage: string = [%raw "require('../assets/pull_request.png')"];
-
 let fakeData: Decoder.pullRequest = {
   repoName: "groot-groups-store",
   avatarUrl: "https://avatars3.githubusercontent.com/u/35497479?u=67e4d7cdce1cd6519f608c43e962e0d94582b22b&v=4",
